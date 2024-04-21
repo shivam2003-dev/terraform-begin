@@ -1,0 +1,13 @@
+# Ignore Terraform directory
+.terraform
+
+# Ignore  plan and state files
+*.tfplan
+*.tfstate*
+*.tfout
+
+# Ignore  crash log
+crash.log
+
+# Ignore any.DS_Store files for macOS users
+.DS_Store
