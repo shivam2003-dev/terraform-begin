@@ -46,6 +46,24 @@ provider "aws" {
   region = "us-west-2" # Change this to your desired region
 }
 
+
+# Create EBS volume
+resource "aws_ebs_volume" "example" {
+  availability_zone = "us-east-1a"
+  size             = 20
+  tags = {
+    Name = "my_volume"
+  }
+}
+
+# Attach volume to an instance
+resource "aws_volume_attachment" "ebs_att" {
+  device_name = "/dev/xvdh"
+  volume_id   = aws_ebs_volume.example.id
+  instance_id = aws_instance.server_az1_1.id
+}
+
+
 resource "aws_instance" "server_other_region" {
   provider      = aws.us-west-2
   ami           ="ami-0688ba7eeeeefe3cd"  # Replace this with a valid AMI ID in us-west-2
